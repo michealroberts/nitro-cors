@@ -4,7 +4,7 @@
     "skipLibCheck": true,
     "module": "ESNext",
     "target": "ESNext",
-    "lib": ["WebWorker", "DOM.Iterable"],
+    "lib": ["ESNext", "WebWorker", "DOM.Iterable"],
     "declaration": true,
     "moduleResolution": "Node",
     "strict": true,
