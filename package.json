@@ -52,6 +52,7 @@
     "path": "^0.12.7",
     "prettier": "^2.8.8",
     "rollup": "^3.22.0",
+    "supertest": "^6.3.3",
     "tslib": "^2.5.2",
     "typescript": "^5.0.4",
     "vite": "^4.3.8",
