@@ -6,8 +6,16 @@
 
 /*****************************************************************************************************************/
 
-export { useCORS } from './useCors'
+import { describe, expect, it, suite } from 'vitest'
 
-export { defineCORSEventHandler } from './defineCORSEventHandler'
+import { defineCORSEventHandler } from '../src'
 
 /*****************************************************************************************************************/
+
+suite('nitro-cors eventHandler', () => {
+  describe('defineCORSEventHandler', () => {
+    it('should be defined', () => {
+      expect(defineCORSEventHandler).toBeDefined()
+    })
+  })
+})

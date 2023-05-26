@@ -6,8 +6,14 @@
 
 /*****************************************************************************************************************/
 
-export { useCORS } from './useCors'
+import { corsHandlers } from './cors'
 
-export { defineCORSEventHandler } from './defineCORSEventHandler'
+import { type Handler } from '../shared/handler'
+
+/*****************************************************************************************************************/
+
+export const handlers: Handler[] = [
+  ...corsHandlers
+]
 
 /*****************************************************************************************************************/
