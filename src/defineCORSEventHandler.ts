@@ -7,11 +7,11 @@
 /*****************************************************************************************************************/
 
 import {
+  type EventHandler,
   type H3CorsOptions,
   getHeaders,
   setHeader,
   defineEventHandler,
-  EventHandler,
   isCorsOriginAllowed
 } from 'h3'
 

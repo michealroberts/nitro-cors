@@ -6,10 +6,15 @@
 
 /*****************************************************************************************************************/
 
-export { useCORS } from './useCors'
+import { type EventHandler, type H3CorsOptions, defineEventHandler, handleCors } from 'h3'
 
-export { corsEventHandler } from './corsEventHandler'
+/*****************************************************************************************************************/
 
-export { defineCORSEventHandler } from './defineCORSEventHandler'
+export const corsEventHandler = <T>(handler: EventHandler<T>, options: H3CorsOptions) => {
+  return defineEventHandler(async event => {
+    handleCors(event, options)
+    return handler(event)
+  })
+}
 
 /*****************************************************************************************************************/
