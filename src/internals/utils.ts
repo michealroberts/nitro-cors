@@ -11,7 +11,8 @@ import {
   type H3CorsOptions,
   appendCorsHeaders,
   appendCorsPreflightHeaders,
-  getMethod
+  getMethod,
+  sendNoContent
 } from 'h3'
 
 /*****************************************************************************************************************/
@@ -31,8 +32,9 @@ export const useCORS = (event: H3Event, options: H3CorsOptions): void => {
   }
 
   // If the method is allowed and If OPTIONS is allowed, append headers:
-  if (methodIsAllowed && methodIsOptions) {
-    return appendCorsPreflightHeaders(event, options)
+  if (methodIsAllowed && methodIsOptions && options.preflight) {
+    appendCorsPreflightHeaders(event, options)
+    return sendNoContent(event, options.preflight.statusCode)
   }
 
   // If the method is allowed and the method is OPTIONS, append CORS headers:

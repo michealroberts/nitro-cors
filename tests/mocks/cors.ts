@@ -16,7 +16,7 @@ import { defineCORSEventHandler } from '../../src'
 
 export const corsHandlers: Handler[] = [
   {
-    method: 'GET',
+    method: '*',
     url: '/cors/allowed',
     handler: defineCORSEventHandler(
       eventHandler(async event => {
@@ -31,6 +31,82 @@ export const corsHandlers: Handler[] = [
       {
         origin: '*',
         methods: '*'
+      }
+    )
+  },
+  {
+    method: '*',
+    url: '/cors/origin-match',
+    handler: defineCORSEventHandler(
+      eventHandler(async event => {
+        setHeaders(event, {
+          'X-CORS-Allowed': 'true'
+        })
+
+        return {
+          cors: true
+        }
+      }),
+      {
+        origin: ['http://nitro-cors.unjs.io'],
+        methods: '*'
+      }
+    )
+  },
+  {
+    method: ['GET', 'OPTIONS'],
+    url: '/cors/origin-mismatch',
+    handler: defineCORSEventHandler(
+      eventHandler(async event => {
+        setHeaders(event, {
+          'X-CORS-Allowed': 'false'
+        })
+
+        return {
+          cors: false
+        }
+      }),
+      {
+        origin: ['https://nitro.unjs.io'],
+        methods: ['GET', 'OPTIONS']
+      }
+    )
+  },
+  {
+    method: ['GET', 'OPTIONS'],
+    url: '/cors/method-match',
+    handler: defineCORSEventHandler(
+      eventHandler(async event => {
+        setHeaders(event, {
+          'X-CORS-Allowed': 'true'
+        })
+
+        return {
+          cors: true
+        }
+      }),
+      {
+        origin: '*',
+        methods: ['GET', 'OPTIONS']
+      }
+    )
+  },
+  {
+    method: ['GET', 'OPTIONS'],
+    url: '/cors/method-mismatch',
+    handler: defineCORSEventHandler(
+      eventHandler(async event => {
+        setHeaders(event, {
+          'X-CORS-Allowed': 'false'
+        })
+
+        return {
+          cors: false
+        }
+      }),
+      {
+        origin: '*',
+        methods: ['GET', 'OPTIONS']
       }
     )
   },
