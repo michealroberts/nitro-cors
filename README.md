@@ -1,4 +1,4 @@
-# nitro CORS Cross Origin Resource Sharing
+# nitro Cross-Origin Resource Sharing (CORS) Headers
 
 nitro native CORS event handler.
 
