@@ -39,20 +39,16 @@ export default defineCORSEventHandler(handler, {
 })
 ```
 
-...or...
+...or... using as nitro middleware:
 
 ```ts
+// :file middleware/cors.ts
 import { corsEventHandler } from 'nitro-cors'
 
-export default corsEventHandler(
-  eventHandler(async event => {
-    // ...
-  }),
-  {
-    origin: '*',
-    methods: '*'
-  }
-)
+export default corsEventHandler(_event => {}, {
+  origin: '*',
+  methods: '*'
+})
 ```
 
 The `defineCORSEventHandler` and `corsEventHandler` functions take two arguments:
