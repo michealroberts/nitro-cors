@@ -12,12 +12,13 @@ import {
   appendCorsHeaders,
   appendCorsPreflightHeaders,
   getMethod,
+  isPreflightRequest,
   sendNoContent
 } from 'h3'
 
 /*****************************************************************************************************************/
 
-export const useCORS = (event: H3Event, options: H3CorsOptions): void => {
+export const useCORS = (event: H3Event, options: H3CorsOptions): boolean => {
   const method = getMethod(event)
 
   const { methods = [] } = options
@@ -27,20 +28,20 @@ export const useCORS = (event: H3Event, options: H3CorsOptions): void => {
   const methodIsOptions = method === 'OPTIONS'
 
   // If the method is not allowed, return:
-  if (!methodIsAllowed) {
-    return
+  if (!methodIsAllowed && !methodIsOptions) {
+    return false
   }
 
   // If the method is allowed and If OPTIONS is allowed, append headers:
-  if (methodIsAllowed && methodIsOptions && options.preflight) {
+  if (isPreflightRequest(event)) {
     appendCorsPreflightHeaders(event, options)
-    return sendNoContent(event, options.preflight.statusCode)
+    sendNoContent(event, options.preflight?.statusCode || 204)
+    return true
   }
 
   // If the method is allowed and the method is OPTIONS, append CORS headers:
-  if (methodIsAllowed && !methodIsOptions) {
-    return appendCorsHeaders(event, options)
-  }
+  appendCorsHeaders(event, options)
+  return false
 }
 
 /*****************************************************************************************************************/
