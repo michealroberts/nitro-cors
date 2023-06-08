@@ -24,10 +24,11 @@ export const defineCORSEventHandler = <T extends any>(
   options: H3CorsOptions
 ) => {
   return defineEventHandler(async event => {
+    useCORS(event, options)
+
     const { origin } = getHeaders(event)
 
     if (origin && isCorsOriginAllowed(origin, options)) {
-      useCORS(event, options)
       setHeader(event, 'Origin', origin)
     }
 
