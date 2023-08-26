@@ -8,6 +8,8 @@
 
 import {
   type EventHandler,
+  type EventHandlerRequest,
+  type EventHandlerResponse,
   type H3CorsOptions,
   getHeaders,
   setHeader,
@@ -19,11 +21,14 @@ import { useCORS } from './internals/utils'
 
 /*****************************************************************************************************************/
 
-export const defineCORSEventHandler = <T extends any>(
-  handler: EventHandler<T>,
+export const defineCORSEventHandler = <
+  TRequest extends EventHandlerRequest,
+  TResponse extends EventHandlerResponse
+>(
+  handler: EventHandler<TRequest, TResponse>,
   options: H3CorsOptions
-) => {
-  return defineEventHandler(async event => {
+): EventHandler<EventHandlerRequest, TResponse> => {
+  return defineEventHandler(event => {
     useCORS(event, options)
 
     const { origin } = getHeaders(event)
