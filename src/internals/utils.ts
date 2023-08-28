@@ -11,7 +11,6 @@ import {
   type H3CorsOptions,
   appendCorsHeaders,
   appendCorsPreflightHeaders,
-  getMethod,
   isPreflightRequest,
   sendNoContent
 } from 'h3'
@@ -19,13 +18,12 @@ import {
 /*****************************************************************************************************************/
 
 export const useCORS = (event: H3Event, options: H3CorsOptions): boolean => {
-  const method = getMethod(event)
-
   const { methods = [] } = options
 
-  const methodIsAllowed = (Array.isArray(methods) && methods.includes(method)) || methods == '*'
+  const methodIsAllowed =
+    (Array.isArray(methods) && methods.includes(event.method)) || methods == '*'
 
-  const methodIsOptions = method === 'OPTIONS'
+  const methodIsOptions = event.method === 'OPTIONS'
 
   // If the method is not allowed, return:
   if (!methodIsAllowed && !methodIsOptions) {
