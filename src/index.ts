@@ -12,4 +12,6 @@ export { corsEventHandler } from './corsEventHandler'
 
 export { defineCORSEventHandler } from './defineCORSEventHandler'
 
+export { onRequestCORSMiddleware, cors } from './onRequestCORSMiddleware'
+
 /*****************************************************************************************************************/

@@ -8,12 +8,12 @@
 
 import { corsHandlers } from './cors'
 
+import { corsOnRequestMiddlewareHandlers } from './corsOnRequestMiddleware'
+
 import { type Handler } from '../shared/handler'
 
 /*****************************************************************************************************************/
 
-export const handlers: Handler[] = [
-  ...corsHandlers
-]
+export const handlers: Handler[] = [...corsHandlers, ...corsOnRequestMiddlewareHandlers]
 
 /*****************************************************************************************************************/
