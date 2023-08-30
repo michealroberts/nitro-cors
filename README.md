@@ -4,7 +4,7 @@ nitro native CORS event handler.
 
 ## Requirements
 
-- [nitro](https://nitro.unjs.io) v.2.4.\* or higher
+- [nitro](https://nitro.unjs.io) v.2.6.\* or higher
 
 ## Installation
 
@@ -22,9 +22,22 @@ yarn add nitro-cors
 
 ## Usage
 
-nitro CORS is built upon the h3 cors library. To read more about h3's inbuilt cors library, please consult the [h3 repository](https://github.com/unjs/h3#utilities).
+nitro CORS is built upon the h3 CORS utilities provided by the h3 library. To read more about h3's inbuilt cors library, please consult the [h3 repository](https://github.com/unjs/h3#utilities).
 
-nitro-cors aims to provide a simple wrapper to define a CORS event handler per nitro event handler, or per route. To use it, simply import the `defineCORSEventHandler` function and wrap your event handler with it as follows:
+To get started, you can enable CORS on a specific event handler by using the object syntax definitions intorduced in nitro v2.6.0 and h3 v1.8.0 as follows:
+
+```ts
+import { cors } from 'nitro-cors'
+
+export default eventHandler({
+  onRequest: [cors],
+  async handler(event) {
+    return 'Hello CORS!'
+  }
+})
+```
+
+nitro-cors also provides a simple wrapper to define a CORS event handler per nitro event handler, or per route. To use it, simply import the `defineCORSEventHandler` function and wrap your event handler with it as follows:
 
 ```ts
 import { defineCORSEventHandler } from 'nitro-cors'
