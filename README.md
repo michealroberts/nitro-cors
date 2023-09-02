@@ -30,7 +30,13 @@ To get started, you can enable CORS on a specific event handler by using the obj
 import { cors } from 'nitro-cors'
 
 export default eventHandler({
-  onRequest: [cors],
+  onRequest: [
+    cors({
+      origin: '*',
+      methods: '*'
+      // ... add your options overrides here
+    })
+  ],
   async handler(event) {
     return 'Hello CORS!'
   }
@@ -69,12 +75,12 @@ The `defineCORSEventHandler` and `corsEventHandler` functions take two arguments
 - `handler`: the event handler to wrap of type `EventHandler<T>`, which will ensure typesafety for the event handler return type.
 - `options`: the options to pass to the cors handler of type `H3CorsOptions`. These are the same options as the ones passed to the h3 cors library.
 
-## TBI
+## Options
 
-- [x] Ensure typesafety for the cors options
-- [x] Ensure typesafety for the event handler return type
-- [x] Ensure typesafety for the event handler arguments
-- [x] Ensure allowedHeaders is passed to the cors handler
-- [x] Ensure exposedHeaders is passed to the cors handler
-- [x] Ensure credentials are passed to the cors handler
-- [x] Ensure maxAge is passed to the cors handler
+The options passed to the cors handler are the same as the ones passed to the h3 cors library. Please consult the [h3 repository](https://github.com/unjs/h3#utilities)
+
+## Acknowledgements
+
+This library would not be possible if it were not for standing on the shoulders of these giants:
+
+- [h3](https://github.com/unjs)
