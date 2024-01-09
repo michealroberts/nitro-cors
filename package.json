@@ -25,6 +25,7 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/nitro-cors.es.js",
       "require": "./dist/nitro-cors.umd.js"
     }
