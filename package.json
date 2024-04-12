@@ -1,6 +1,6 @@
 {
   "name": "nitro-cors",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "observerly's CORS event handler for the Nitro web server",
   "private": false,
   "repository": {
